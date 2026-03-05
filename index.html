@@ -15,7 +15,19 @@
   --text:#18181f;--text2:#55556a;--text3:#9595a5;
   --shadow:0 1px 2px rgba(17,17,26,0.025),0 0 0 1px rgba(17,17,26,0.015);
   --shadow-md:0 10px 24px rgba(17,17,26,0.06),0 1px 6px rgba(17,17,26,0.03);
+  --topbar-bg:rgba(255,255,255,0.82);
   --r:12px;
+}
+body[data-theme="dark"]{
+  --bg:#11141a;--surface:#171b23;--surface2:#1e2430;--border:#2a3240;--border2:#364051;
+  --accent:#7f73ff;--accent-s:rgba(127,115,255,0.16);
+  --red:#ff6b81;--red-s:rgba(255,107,129,0.14);
+  --green:#35bf8a;--green-s:rgba(53,191,138,0.14);
+  --amber:#f0a53a;--amber-s:rgba(240,165,58,0.14);
+  --text:#eef2ff;--text2:#c2cadb;--text3:#8d97ad;
+  --shadow:0 1px 2px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.02);
+  --shadow-md:0 14px 28px rgba(0,0,0,0.4),0 2px 10px rgba(0,0,0,0.26);
+  --topbar-bg:rgba(17,20,26,0.86);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-height:100vh;display:flex;overflow:hidden;font-size:14px;-webkit-font-smoothing:antialiased;}
@@ -43,12 +55,18 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
 .ei-row{display:flex;gap:5px;}
 .icon-btn{flex:1;padding:6px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--text3);font-size:11.5px;cursor:pointer;font-family:'Geist',sans-serif;transition:all .1s;display:flex;align-items:center;justify-content:center;gap:5px;font-weight:500;}
 .icon-btn:hover{background:var(--border);color:var(--text2);}
+.settings-footer-btn{flex:none;width:100%;justify-content:flex-start;padding:7px 10px;font-size:12px;}
 
 /* MAIN */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;height:100vh;}
-.topbar{padding:0 24px;height:56px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.82);backdrop-filter:blur(14px);flex-shrink:0;}
+.topbar{padding:0 24px;height:56px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;background:var(--topbar-bg);backdrop-filter:blur(14px);flex-shrink:0;}
 .proj-title{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;letter-spacing:-0.3px;color:var(--text);}
 .topbar-right{margin-left:auto;display:flex;align-items:center;gap:6px;}
+.theme-btn{padding:6px 9px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text2);font-size:12px;cursor:pointer;font-family:'Geist',sans-serif;transition:all .12s;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.theme-btn:hover{background:var(--surface);border-color:var(--border2);color:var(--text);}
+.search-btn{padding:6px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text2);font-size:12px;cursor:pointer;font-family:'Geist',sans-serif;transition:all .12s;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.search-btn:hover{background:var(--surface);border-color:var(--border2);color:var(--text);}
+.top-search-btn{width:30px;height:30px;padding:0;justify-content:center;}
 .tab-bar{display:flex;gap:3px;background:var(--surface2);border-radius:10px;padding:3px;border:1px solid var(--border);}
 .tab-btn{padding:5px 12px;border-radius:7px;border:none;background:transparent;color:var(--text3);font-size:12.5px;cursor:pointer;font-family:'Geist',sans-serif;font-weight:500;transition:all .12s;}
 .tab-btn.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow);}
@@ -235,6 +253,8 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
 .snip-code{font-family:'Geist Mono',monospace;font-size:12px;line-height:1.6;color:var(--text2);background:#fafaf8;padding:12px 13px;border:none;outline:none;width:100%;resize:none;min-height:80px;overflow:hidden;field-sizing:content;tab-size:2;word-break:break-word;}
 .snip-code::placeholder{color:var(--text3);}
 .snip-code:focus{color:var(--text);background:#f8f8f5;}
+body[data-theme="dark"] .snip-code{background:#141a24;color:var(--text2);}
+body[data-theme="dark"] .snip-code:focus{background:#18202c;color:var(--text);}
 .snip-foot{padding:7px 13px;border-top:1px solid var(--border);}
 .snip-ptag{font-size:9.5px;font-family:'Geist Mono',monospace;text-transform:uppercase;letter-spacing:1px;font-weight:600;}
 
@@ -319,6 +339,26 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
 
 .task-meta{font-size:11.5px;color:var(--text3);font-family:'Geist Mono',monospace;line-height:1.6;margin-bottom:10px;}
 
+.search-modal{width:720px;max-width:calc(100vw - 36px);}
+.search-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;}
+.search-head h3{margin:0;padding-right:8px;}
+.search-kbd{margin-left:0;font-size:10px;color:var(--text3);font-family:'Geist Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:2px 6px;flex-shrink:0;}
+.search-input{margin-bottom:8px;}
+.search-results{max-height:52vh;overflow:auto;border:1px solid var(--border);border-radius:10px;background:var(--surface2);}
+.search-empty{padding:14px 12px;font-size:12.5px;color:var(--text3);}
+.search-row{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);padding:10px 12px;display:flex;align-items:flex-start;gap:9px;cursor:pointer;text-align:left;color:var(--text);font-family:'Geist',sans-serif;}
+.search-row:last-child{border-bottom:none;}
+.search-row:hover{background:var(--surface);}
+.search-type{font-size:9px;font-family:'Geist Mono',monospace;text-transform:uppercase;letter-spacing:.7px;padding:2px 6px;border-radius:999px;border:1px solid var(--border);color:var(--text3);background:var(--surface);white-space:nowrap;}
+.search-main{flex:1;min-width:0;}
+.search-title{display:block;font-size:12.5px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.search-sub{display:block;font-size:11px;color:var(--text3);font-family:'Geist Mono',monospace;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+.settings-theme-row{display:flex;gap:6px;}
+.settings-theme-btn{flex:1;padding:7px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text3);font-size:12px;font-family:'Geist',sans-serif;font-weight:500;cursor:pointer;transition:all .1s;}
+.settings-theme-btn:hover{background:var(--border);color:var(--text2);}
+.settings-theme-btn.active{background:var(--accent-s);border-color:var(--accent);color:var(--accent);font-weight:600;}
+
 .due-badge{font-size:9.5px;padding:2px 7px;border-radius:20px;font-family:'Geist Mono',monospace;font-weight:600;letter-spacing:.3px;white-space:nowrap;border:1px solid transparent;}
 .due-overdue{background:var(--red-s);color:var(--red);border-color:rgba(232,68,90,.25);}
 .due-today{background:var(--amber-s);color:var(--amber);border-color:rgba(217,119,6,.25);}
@@ -367,15 +407,7 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
       <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       Neues Projekt
     </button>
-    <div class="ei-row">
-      <button class="icon-btn" onclick="exportData()">
-        <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export
-      </button>
-      <button class="icon-btn" onclick="document.getElementById('imp-file').click()">
-        <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><path d="M7 9V1M4 4l3-3 3 3M2 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Import
-      </button>
-      <input type="file" id="imp-file" accept=".json" style="display:none" onchange="importData(event)">
-    </div>
+    <button class="icon-btn settings-footer-btn" onclick="openSettingsModal()">Einstellungen</button>
   </div>
 </aside>
 
@@ -386,6 +418,9 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
       Alle Projekte
     </div>
     <div class="topbar-right">
+      <button class="search-btn top-search-btn" onclick="openGlobalSearch()" title="Suche" aria-label="Suche">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M9.5 9.5L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
       <div class="tab-bar">
         <button class="tab-btn active" onclick="switchTab('overview')" id="tab-overview">Übersicht</button>
         <button class="tab-btn" onclick="switchTab('notes')" id="tab-notes">Notizen</button>
@@ -524,6 +559,50 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
   </div>
 </div>
 
+<!-- GLOBAL SEARCH MODAL -->
+<div class="modal-overlay" id="search-modal">
+  <div class="modal search-modal">
+    <div class="search-head">
+      <h3 style="margin-bottom:0">Globale Suche</h3>
+      <span class="search-kbd">Ctrl/Cmd + K</span>
+    </div>
+    <input type="text" class="m-inp search-input" id="search-inp" placeholder="Suche in Projekten, Aufgaben, Notizen, Snippets, Dateien…" oninput="renderGlobalSearch()">
+    <div class="search-results" id="search-results"></div>
+    <div class="m-actions" style="margin-top:12px">
+      <button class="m-cancel" onclick="closeGlobalSearch()">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settings-modal">
+  <div class="modal" style="width:430px;max-width:calc(100vw - 36px)">
+    <h3>Einstellungen</h3>
+    <div class="fmodal-row" style="margin-bottom:12px">
+      <label>Design</label>
+      <div class="settings-theme-row">
+        <button class="settings-theme-btn" id="theme-light-btn" onclick="setTheme('light')">Light</button>
+        <button class="settings-theme-btn" id="theme-dark-btn" onclick="setTheme('dark')">Dark</button>
+      </div>
+    </div>
+    <div class="fmodal-row" style="margin-bottom:6px">
+      <label>Daten</label>
+      <div class="ei-row">
+        <button class="icon-btn" onclick="exportData();closeSettingsModal()">
+          <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export
+        </button>
+        <button class="icon-btn" onclick="document.getElementById('imp-file').click()">
+          <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><path d="M7 9V1M4 4l3-3 3 3M2 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Import
+        </button>
+      </div>
+      <input type="file" id="imp-file" accept=".json" style="display:none" onchange="importData(event);closeSettingsModal()">
+    </div>
+    <div class="m-actions" style="margin-top:12px">
+      <button class="m-cancel" onclick="closeSettingsModal()">Schließen</button>
+    </div>
+  </div>
+</div>
+
 <!-- DIALOG -->
 <div class="dialog-overlay" id="dialog-overlay">
   <div class="dialog-box">
@@ -572,12 +651,160 @@ let _taskModalPid='', _taskModalTid='';
 let _taskModalSubtasks=[];
 let _taskCreatePid='', _taskCreateStatus='todo';
 let _noteCreatePid='';
+let curTheme=localStorage.getItem('fiae_theme')||'light';
+let _searchResults=[];
+let _globalShortcutsWired=false;
 
 // Drag state
 let dragTaskId=null, dragProjectId=null, dragPlaceholder=null, dragTargetStatus=null, dragDropCommitted=false;
 
 function save(){localStorage.setItem('fiae_v4',JSON.stringify(state));}
 function debounceSave(){clearTimeout(saveTimer);saveTimer=setTimeout(save,400);}
+
+function applyTheme(theme){
+  curTheme=theme==='dark'?'dark':'light';
+  document.body.dataset.theme=curTheme;
+  localStorage.setItem('fiae_theme',curTheme);
+  syncThemeButtons();
+}
+function setTheme(theme){
+  applyTheme(theme);
+}
+function toggleTheme(){
+  applyTheme(curTheme==='dark'?'light':'dark');
+}
+function syncThemeButtons(){
+  document.getElementById('theme-light-btn')?.classList.toggle('active',curTheme==='light');
+  document.getElementById('theme-dark-btn')?.classList.toggle('active',curTheme==='dark');
+}
+function openSettingsModal(){
+  syncThemeButtons();
+  document.getElementById('settings-modal')?.classList.add('open');
+}
+function closeSettingsModal(){
+  document.getElementById('settings-modal')?.classList.remove('open');
+}
+
+function openGlobalSearch(prefill=''){
+  const modal=document.getElementById('search-modal');
+  const inp=document.getElementById('search-inp');
+  if(!modal||!inp)return;
+  modal.classList.add('open');
+  inp.value=prefill||'';
+  renderGlobalSearch();
+  setTimeout(()=>{inp.focus();inp.select();},80);
+}
+function closeGlobalSearch(){
+  document.getElementById('search-modal')?.classList.remove('open');
+}
+function searchProjectName(pid){
+  return state.projects.find(p=>p.id===pid)?.name||'Projekt';
+}
+function renderGlobalSearch(){
+  const inp=document.getElementById('search-inp');
+  const wrap=document.getElementById('search-results');
+  if(!inp||!wrap)return;
+  const q=inp.value.trim().toLowerCase();
+  if(!q){
+    _searchResults=[];
+    wrap.innerHTML='<div class="search-empty">Suchbegriff eingeben …</div>';
+    return;
+  }
+
+  const results=[];
+  state.projects.forEach(p=>{
+    if((p.name||'').toLowerCase().includes(q)){
+      results.push({type:'Projekt',title:p.name,sub:'Projekt öffnen',pid:p.id});
+    }
+  });
+
+  state.projects.forEach(p=>{
+    (state.tasks[p.id]||[]).forEach(t=>{
+      const st=getTaskSubtaskStats(t);
+      const due=getTaskDueInfo(t);
+      const hay=[
+        getTaskTitle(t),
+        getTaskDescription(t),
+        t.priority||'',
+        t.status||'',
+        t.dueDate||'',
+        ...(normalizeSubtasks(t.subtasks).map(s=>s.text))
+      ].join(' ').toLowerCase();
+      if(hay.includes(q)){
+        const sub=[searchProjectName(p.id),due?due.label:'',st.total>0?st.done+'/'+st.total+' Steps':''].filter(Boolean).join(' · ');
+        results.push({type:'Aufgabe',title:getTaskTitle(t)||'Ohne Titel',sub,pid:p.id,tid:t.id});
+      }
+    });
+  });
+
+  state.projects.forEach(p=>{
+    (state.notes[p.id]||[]).forEach(n=>{
+      const hay=[n.title||'',n.body||''].join(' ').toLowerCase();
+      if(hay.includes(q)){
+        results.push({type:'Notiz',title:n.title||'Ohne Titel',sub:searchProjectName(p.id),pid:p.id,nid:n.id});
+      }
+    });
+  });
+
+  state.projects.forEach(p=>{
+    (state.snippets[p.id]||[]).forEach(s=>{
+      const hay=[s.title||'',s.code||'',s.lang||''].join(' ').toLowerCase();
+      if(hay.includes(q)){
+        results.push({type:'Snippet',title:s.title||'Ohne Titel',sub:searchProjectName(p.id)+' · '+(s.lang||''),pid:p.id,sid:s.id});
+      }
+    });
+  });
+
+  state.projects.forEach(p=>{
+    (state.files[p.id]||[]).forEach(f=>{
+      const hay=[f.title||'',f.url||'',f.filename||'',f.path||''].join(' ').toLowerCase();
+      if(hay.includes(q)){
+        results.push({type:'Datei',title:f.title||'Eintrag',sub:searchProjectName(p.id),pid:p.id,fid:f.id});
+      }
+    });
+  });
+
+  _searchResults=results.slice(0,80);
+  if(!_searchResults.length){
+    wrap.innerHTML='<div class="search-empty">Keine Treffer gefunden.</div>';
+    return;
+  }
+  wrap.innerHTML=_searchResults.map((r,i)=>
+    '<button class="search-row" onclick="openSearchResult('+i+')">'+
+      '<span class="search-type">'+esc(r.type)+'</span>'+
+      '<span class="search-main">'+
+        '<span class="search-title">'+esc(r.title)+'</span>'+
+        '<span class="search-sub">'+esc(r.sub||'')+'</span>'+
+      '</span>'+
+    '</button>'
+  ).join('');
+}
+function openSearchResult(index){
+  const r=_searchResults[index];
+  if(!r)return;
+  closeGlobalSearch();
+  if(r.type==='Projekt'){
+    selectProject(r.pid);
+    return;
+  }
+  selectProject(r.pid);
+  if(r.type==='Aufgabe'){
+    switchTab('tasks');
+    setTimeout(()=>openTaskModal(r.pid,r.tid),60);
+    return;
+  }
+  if(r.type==='Notiz'){
+    switchTab('notes');
+    return;
+  }
+  if(r.type==='Snippet'){
+    switchTab('snippets');
+    return;
+  }
+  if(r.type==='Datei'){
+    switchTab('files');
+  }
+}
 
 // ── DIALOG ──
 let _dlgResolve=null;
@@ -705,6 +932,8 @@ document.getElementById('file-modal').addEventListener('click',e=>{if(e.target.i
 document.getElementById('task-modal').addEventListener('click',e=>{if(e.target.id==='task-modal')closeTaskModal();});
 document.getElementById('task-create-modal').addEventListener('click',e=>{if(e.target.id==='task-create-modal')closeCreateTaskModal();});
 document.getElementById('note-create-modal').addEventListener('click',e=>{if(e.target.id==='note-create-modal')closeCreateNoteModal();});
+document.getElementById('search-modal').addEventListener('click',e=>{if(e.target.id==='search-modal')closeGlobalSearch();});
+document.getElementById('settings-modal').addEventListener('click',e=>{if(e.target.id==='settings-modal')closeSettingsModal();});
 
 // ── FILE MODAL ──
 function openFileModal(pid){
@@ -1402,12 +1631,29 @@ function wirePersistentListeners(){
   if(noteCreateBody){
     noteCreateBody.onkeydown=e=>{if((e.key==='Enter'&&e.ctrlKey)||(e.key==='Enter'&&e.metaKey)){e.preventDefault();confirmCreateNoteModal();}};
   }
+  const searchInp=document.getElementById('search-inp');
+  if(searchInp){
+    searchInp.onkeydown=e=>{
+      if(e.key==='Escape'){e.preventDefault();closeGlobalSearch();}
+      if(e.key==='Enter'&&_searchResults.length){e.preventDefault();openSearchResult(0);}
+    };
+  }
+  if(!_globalShortcutsWired){
+    document.addEventListener('keydown',e=>{
+      if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){
+        e.preventDefault();
+        openGlobalSearch();
+      }
+    });
+    _globalShortcutsWired=true;
+  }
 }
 
 function esc(s=''){const v=String(s??'');return v.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
 
 wireFileModal();
 wirePersistentListeners();
+applyTheme(curTheme);
 renderSidebar();
 renderContent();
 </script>
